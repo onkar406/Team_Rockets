@@ -54,8 +54,8 @@ void goAlternate2(int m11,int m12,int m21,int m22,int analogSpeed)
    {
       analogWrite(m11,LOW);
       digitalWrite(m12,analogSpeed);
-      analogWrite(m21,LOW);
-      digitalWrite(m22,analogSpeed);
+      analogWrite(m21,analogSpeed);
+      digitalWrite(m22,LOW);
       delay(200);
    } 
 }
