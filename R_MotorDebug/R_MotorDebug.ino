@@ -7,12 +7,12 @@ void setup()
 {
   pinMode(5,OUTPUT);
   pinMode(6,OUTPUT);
-  pinMode(9,OUTPUT);
-  pinMode(10,OUTPUT);  
+  pinMode(7,OUTPUT);
+  pinMode(8,OUTPUT);  
 }
 void loop()
 {
-  debug(5,6,9,10,70);
+  debug(5,6,7,8,70);
 }
 void goAllBackward(int m11,int m12,int m21,int m22,int analogSpeed)
 {
