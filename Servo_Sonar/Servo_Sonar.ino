@@ -15,7 +15,7 @@ int pos = 0;    // variable to store the servo position
 
 void setup() 
 { 
-  
+
   myservo.attach(9);
   Serial.begin(9600);  // attaches the servo on pin 9 to the servo object 
 } 
@@ -53,6 +53,7 @@ void loop()
     Serial.println(myservo.read());  
   } 
 } 
+
 
 
 

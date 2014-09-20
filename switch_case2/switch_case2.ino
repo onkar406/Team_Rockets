@@ -15,7 +15,7 @@ void loop() {
 
 
       Serial.println("Forward");
-                            //do something when var equals 1
+      //do something when var equals 1
       break;
     case 2:
 
@@ -36,4 +36,5 @@ void loop() {
     }
   }
 }
+
 

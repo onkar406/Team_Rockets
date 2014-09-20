@@ -62,7 +62,7 @@ void setup(){
 
 void loop()
 {
-write_LCD("Hello World");
+  write_LCD("Hello World");
 }
 
 
@@ -73,7 +73,8 @@ void write_LCD(String str)
   delay(100);
   for(int i=0;i<str.length();i++)
   {
-   lcd.write(str.charAt(i)); 
+    lcd.write(str.charAt(i)); 
   }
 }
+
 
