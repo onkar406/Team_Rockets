@@ -33,29 +33,47 @@ void setup()
 void loop()
 {
   int a = getDistance();
-  if(a<350)
+  if(a>=0 && a<=200)
   {
     int left,right;
-    Serial.println("Checking...");
-    Serial.println(a,DEC);
+    Serial.println("Checking Forward Distance...    ");
+    Serial.print(a,DEC);
+
+    Serial.println("");                                 
+
     int currentAngle = mServo.read();
     Serial.println(currentAngle,DEC);
     delay(500);
+
     mServo.write(179);
-    Serial.println("Left: ");
-    Serial.println((left=getDistance()),DEC);
     delay(1000);
-    Serial.println("Right: ");
+    Serial.println("Left Distance: ");
+    Serial.print((left=getDistance()),DEC);
+    Serial.println("");                                 
+
+    delay(500);
+
     mServo.write(1);
-    Serial.println((right=getDistance()),DEC);
     delay(1000);
-    if(left<=right) Serial.println("Go right man!"); 
-    else if(left>=right) Serial.println("Go left MAN!");
-    else Serial.println("Kill me now please!");
-    mServo.write(currentAngle);
+    Serial.println("Right Distance: ");
+    Serial.print((right=getDistance()),DEC);
+    Serial.println("");                                 
+
+    delay(500);
+
+    if(left<right && (right-left)>=5) Serial.println("Turn right MAN!"); 
+    else if(left>right && (left-right)>=5) Serial.println("Turn left MAN!");
+    else Serial.println("Twist my neck and kill me! Please!!");
+
+    mServo.write(currentAngle);            //Replace the currentAngle with 90
+    delay(500);   
   }
   delay(1000);
 }
+
+
+
+
 
 
 
