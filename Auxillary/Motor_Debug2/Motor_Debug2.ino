@@ -1,15 +1,60 @@
 int INP_A1=4;
+int EN_A=7;
+int EN_B=8;
+
+
 int INP_B1=10;
 int INP_A2=5;
 int INP_B2=11;
 unsigned long distance = 0;
 int reading;
+
+  void clkA(){
+    digitalWrite(INP_A1,HIGH);
+    digitalWrite(INP_A2,LOW);
+  }
+  void clkB(){
+    digitalWrite(INP_B1,HIGH);
+    digitalWrite(INP_B2,LOW);
+  }
+
+  void anclkA(){
+    digitalWrite(INP_A1,LOW);
+    digitalWrite(INP_A2,HIGH);
+  }
+  void anclkB(){
+    digitalWrite(INP_B1,LOW);
+    digitalWrite(INP_B2,HIGH);
+
+  }
+
+
+  void brakeA(){
+    digitalWrite(INP_A1,HIGH);
+    digitalWrite(INP_A2,HIGH);
+  }
+  void brakeB(){
+    digitalWrite(INP_B1,HIGH);
+    digitalWrite(INP_B2,HIGH);
+  }
+
+
+  void free(){
+    digitalWrite(EN_A,LOW);
+    digitalWrite(EN_B,LOW);
+  }
+
+
 void setup()
 {
   pinMode(4, OUTPUT);
   pinMode(5, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(11, OUTPUT);
+  pinMode(EN_A, OUTPUT);
+    pinMode(EN_B, OUTPUT);
+
+
 }
 
 
@@ -65,42 +110,6 @@ void loop(){
   }
 
 
-
-  void clkA(){
-    digitalWrite(INP_A1,HIGH);
-    digitalWrite(INP_A2,LOW);
-  }
-  void clkB(){
-    digitalWrite(INP_B1,HIGH);
-    digitalWrite(INP_B2,LOW);
-  }
-
-  void anclkA(){
-    digitalWrite(INP_A1,LOW);
-    digitalWrite(INP_A2,HIGH);
-  }
-  void anclkB(){
-    digitalWrite(INP_B1,LOW);
-    digitalWrite(INP_B2,HIGH);
-
-  }
-
-
-  void brakeA(){
-    digitalWrite(INP_A1,HIGH);
-    digitalWrite(INP_A2,HIGH);
-  }
-  void brakeB(){
-    digitalWrite(INP_B1,HIGH);
-    digitalWrite(INP_B2,HIGH);
-  }
-
-
-  void free(){
-    digitalWrite(EN_A,LOW);
-    digitalWrite(EN_B,LOW);
-  }
-}
 /*Clockwise spin
  EN_A=HIGH  INP_A1= HIGH  INP_A2=LOW
  Anti-Clockwise spin
