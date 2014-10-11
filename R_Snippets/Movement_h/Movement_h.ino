@@ -1,6 +1,7 @@
 class Movement
 {
   int forward1,forward2,backward1,backward2;
+  int enable1,enable2;
 public: 
   Movement(int a,int b,int c,int d)
   {
@@ -8,6 +9,8 @@ public:
     backward1 = b;
     forward2 = c;
     backward2 = d;
+    enable1 = true;
+    enable2=true;
     pinMode(a,OUTPUT);
     pinMode(b,OUTPUT);
     pinMode(c,OUTPUT);
@@ -46,7 +49,8 @@ public:
 Movement m(5,6,7,8);
 void setup()
 {
-
+  digitalWrite(22,HIGH);
+  digitalWrite(24,HIGH);  
 }
 void loop()
 {
