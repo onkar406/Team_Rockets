@@ -65,18 +65,18 @@ int getDistance()
   a/=58;
   return a;
 }
-Movement motor(3,5,6,10);
+Movement motor(10,11,12,13);
 void setup()
 {
   mServo.attach(9);
   Serial.begin(9600);
-  digitalWrite(22,true);
-  digitalWrite(24,true);
-  setPorts(7,8);  
+  //digitalWrite(22,true);
+  //digitalWrite(24,true);
+  setPorts(6,7);  
 }
-voi d loop()
+void loop()
 {
-    /*int a = getDistance();
+    int a = getDistance();
   if(a>=0 && a<=200)
   {
     int left,right;
@@ -105,8 +105,8 @@ voi d loop()
 
     delay(500);
 
-    if(left<right && (right-left)>=5) Serial.println("Turn right MAN!"); 
-    else if(left>right && (left-right)>=5) Serial.println("Turn left MAN!");
+    if(left<right && (right-left)>=5) {Serial.println("Turn right MAN!");motor.turnLeft(150);delay(3000);motor.goForward(150); }
+    else if(left>right && (left-right)>=5) Serial.println("Turn left MAN!");motor.turnRighr(150);motor.goForward(150);}
     else Serial.println("Twist my neck and kill me! Please!!");
 
     mServo.write(currentAngle);            //Replace the currentAngle with 90
