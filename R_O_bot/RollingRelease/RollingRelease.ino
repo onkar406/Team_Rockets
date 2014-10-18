@@ -55,6 +55,7 @@ int setPorts(int ec,int tr)
   trigger = tr;
   pinMode(ec,INPUT);
   pinMode(tr,OUTPUT);
+  
 }
 int getDistance()
 {
@@ -70,13 +71,15 @@ void setup()
 {
   mServo.attach(9);
   Serial.begin(9600);
-  digitalWrite(22,true);
-  digitalWrite(24,true);
+  pinMode(12,OUTPUT);
+  pinMode(13,OUTPUT);
+  digitalWrite(12,HIGH);
+  digitalWrite(13,HIGH);
   setPorts(7,8);  
 }
-voi d loop()
+void loop()
 {
-    /*int a = getDistance();
+    int a = getDistance();
   if(a>=0 && a<=200)
   {
     int left,right;
