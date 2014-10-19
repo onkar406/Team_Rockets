@@ -3,49 +3,58 @@
 Servo mServo;
 class Movement
 {
-  int forward1,forward2,backward1,backward2;
+  int a1,a2,b1,b2;
 public: 
   Movement(int a,int b,int c,int d)
   {
-    forward1 = a;
-    backward1 = b;
-    forward2 = c;
-    backward2 = d;
+    b1 = a;
+    a1 = b;
+    b2 = c;
+    a2 = d;
 
     pinMode(a,OUTPUT);
     pinMode(b,OUTPUT);
-    
+
     pinMode(c,OUTPUT);
     pinMode(d,OUTPUT);
   }
-  void turnLeft(int s)
+  void reset()
   {
-    digitalWrite(forward1,HIGH);
-    digitalWrite(backward1,HIGH);
-    analogWrite(forward2,LOW);
-    digitalWrite(backward2,LOW);
+    digitalWrite(b1,LOW);
+    digitalWrite(a1,LOW);
+    digitalWrite(a2,LOW);
+    digitalWrite(b2,LOW);
+
   }
-  void turnRight(int s)
+  void turnLeft()
   {
-    digitalWrite(forward2,HIGH);
-    digitalWrite(backward2,HIGH);
-    analogWrite(forward1,s);
-    digitalWrite(backward1,LOW);
+    digitalWrite(b1,HIGH);
+    digitalWrite(a1,LOW);
+    digitalWrite(a2,HIGH);
+    digitalWrite(b2,LOW);
   }
-  void goForward(int s)
+  void turnRight()
   {
-    analogWrite(forward1,s);
-    analogWrite(forward2,s);
-    digitalWrite(backward1,LOW);
-    digitalWrite(backward2,LOW); 
+    digitalWrite(a1,HIGH);
+    digitalWrite(b1,LOW);
+    digitalWrite(a2,LOW);
+    digitalWrite(b2,HIGH);
   }
-  void goBackward(int s)
+  void goForward()
   {
-    digitalWrite(forward1,LOW);
-    digitalWrite(forward2,LOW);
-    analogWrite(backward1,s);
-    analogWrite(backward1,s);
+    digitalWrite(b1,HIGH);
+    digitalWrite(b2,HIGH);
+    digitalWrite(a1,LOW);
+    digitalWrite(a2,LOW); 
   }
+  void goBackward()
+  {
+    digitalWrite(b1,LOW);
+    digitalWrite(b2,LOW);
+    digitalWrite(a1,HIGH);
+    digitalWrite(a2,HIGH);
+  }
+
 };
 int echo,trigger;
 int setPorts(int ec,int tr)
@@ -54,8 +63,11 @@ int setPorts(int ec,int tr)
   trigger = tr;
   pinMode(ec,INPUT);
   pinMode(tr,OUTPUT);
-  
+
 }
+
+
+
 int getDistance()
 {
   digitalWrite(trigger,HIGH);
@@ -65,19 +77,21 @@ int getDistance()
   a/=58;
   return a;
 }
-Movement motor(3,5,6,10);
+
+
+Movement motor (3,5,6,10);
 void setup()
 {
   mServo.attach(9);
   Serial.begin(9600);
   pinMode(12,OUTPUT);
   pinMode(13,OUTPUT);
-  digitalWrite(12,HIGH);
   digitalWrite(13,HIGH);
   setPorts(7,8);  
 }
 void loop()
 {
+  motor.goForward();
     int a = getDistance();
   if(a>=0 && a<=200)
   {
@@ -88,7 +102,7 @@ void loop()
     Serial.println("");                                 
 
     int currentAngle = mServo.read();
-    //Serial.println(currentAngle,DEC);
+    Serial.println(currentAngle,DEC);
     delay(500);
 
     mServo.write(179);
@@ -107,13 +121,36 @@ void loop()
 
     delay(500);
 
-    if(left<right && (right-left)>=5) Serial.println("Turn right MAN!"); 
-    else if(left>right && (left-right)>=5) Serial.println("Turn left MAN!");
-    else Serial.println("Twist my neck and kill me! Please!!");
+    if(left<right && (right-left)>=5) {
+      Serial.println("Turn right MAN!"); 
+      motor.turnRight();
+      delay(1000);
+      motor.reset();
+    }
 
+    else if(left>right && (left-right)>=5) 
+    {
+      Serial.println("Turn left MAN!");
+      motor.turnLeft();
+      delay(1000);
+
+      motor.reset();
+    }
+    else 
+    {
+      Serial.println("Twist my neck and kill me! Please!!");
+      motor.reset();
+    }
     mServo.write(currentAngle);            //Replace the currentAngle with 90
     delay(500);   
   }
   Serial.println(getDistance());
   delay(1000);
 }
+
+
+
+
+
+
+
