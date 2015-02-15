@@ -88,7 +88,6 @@ Movement motor (3,5,6,10);
 void setup()
 {
   mServo.attach(9);
-  Serial.begin(9600);
   pinMode(12,OUTPUT);
   pinMode(13,OUTPUT);
   digitalWrite(13,HIGH);
@@ -97,37 +96,24 @@ void setup()
 void loop()
 {
   motor.goForward();
-    int a = getDistance();
+  int a = getDistance();
   if(a>=0 && a<=200)
   {
     int left,right;
-    Serial.println("Checking Forward Distance...    ");
-    Serial.print(a,DEC);
-
-    Serial.println("");                                 
-
     int currentAngle = mServo.read();
-    Serial.println(currentAngle,DEC);
     delay(500);
 
     mServo.write(179);
-    delay(1000);
-    Serial.println("Left Distance: ");
-    Serial.print((left=getDistance()),DEC);
-    Serial.println("");                                 
+    delay(1000);                   
 
     delay(500);
 
     mServo.write(0);
-    delay(1000);
-    Serial.println("Right Distance: ");
-    Serial.print((right=getDistance()),DEC);
-    Serial.println("");                                 
+    delay(1000);                           
 
     delay(500);
 
-    if(left<right && (right-left)>=5) {
-      Serial.println("Turn right MAN!"); 
+    if(left<right && (right-left)>=5) { 
       motor.turnRight();
       delay(1000);
       motor.reset();
@@ -135,7 +121,6 @@ void loop()
 
     else if(left>right && (left-right)>=5) 
     {
-      Serial.println("Turn left MAN!");
       motor.turnLeft();
       delay(1000);
 
@@ -143,15 +128,14 @@ void loop()
     }
     else 
     {
-      Serial.println("Twist my neck and kill me! Please!!");
       motor.reset();
     }
     mServo.write(currentAngle);            //Replace the currentAngle with 90
     delay(500);   
   }
-  Serial.println(getDistance());
   delay(1000);
 }
+
 
 
 
